@@ -46,12 +46,12 @@ class _AvatarState extends State<Avatar> {
             },
             decoration: const InputDecoration(
                 focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 2, color: Colors.deepOrange),
+              borderSide: BorderSide(width: 2, color: Colors.black),
             ),
                 hintText: "Enter a name for this face",
               hintStyle: TextStyle(color: Colors.grey),
               label: Text("Name"),
-              labelStyle: TextStyle(color: Colors.deepOrange),
+              labelStyle: TextStyle(color: Colors.black),
               border:OutlineInputBorder(
                 borderSide: BorderSide(width: 2,color: Colors.grey),
               ),),
@@ -69,7 +69,7 @@ class _AvatarState extends State<Avatar> {
                   );
                 }
               },
-              child: const Text('Save',style: TextStyle(color: Colors.deepOrange,
+              child: const Text('Save',style: TextStyle(color: Colors.black,
                   fontWeight: FontWeight.bold,
               fontSize: 18),),
             ),
@@ -103,7 +103,7 @@ class _AvatarState extends State<Avatar> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                        border: Border.all(width: 2,color: Colors.deepOrange)
+                        border: Border.all(width: 2,color: Colors.black)
                     ),
                     child: ListTile(
                       title: Text(savedFaces[index]['name'] ?? 'Unknown',style: TextStyle(fontWeight: FontWeight.bold),),
@@ -268,7 +268,7 @@ class _AvatarState extends State<Avatar> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sketch', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30,color: Colors.white)),
-        backgroundColor: Colors.deepOrange,
+        backgroundColor: Colors.black,
         actions: [
           IconButton(
             icon: Icon(Icons.refresh,color: Colors.white,), // New face button
@@ -313,7 +313,7 @@ class _AvatarState extends State<Avatar> {
                   min: 50.0, // Min zoom size
                   max: 200.0, // Max zoom size
                   divisions: 20,
-                  activeColor: Colors.deepOrange,// Number of divisions for zoom control
+                  activeColor: Colors.black,// Number of divisions for zoom control
                   label: selectedCategory.isEmpty
                       ? zoomLevel.toStringAsFixed(1)
                       : partsState[selectedCategory]!.size.toStringAsFixed(1),
@@ -444,7 +444,7 @@ class _AvatarState extends State<Avatar> {
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             decoration: BoxDecoration(
               color: selectedCategory == category
-                  ? Colors.deepOrange
+                  ? Colors.black
                   : Colors.grey[300],
               borderRadius: BorderRadius.circular(8.0),
             ),
