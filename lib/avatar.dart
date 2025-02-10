@@ -176,6 +176,11 @@ class _AvatarState extends State<Avatar> {
       };
     });
   }
+  void removeFilter() {
+    setState(() {
+      selectedParts[selectedCategory] = ''; // Reset the current selected part to empty (remove filter)
+    });
+  }
 
 
   // Stores the selected parts of the avatar
@@ -195,52 +200,52 @@ class _AvatarState extends State<Avatar> {
   // Contains the available parts for each category
   final Map<String, List<String>> avatarParts = {
     'head': [
-      'assets/images/head/0.png', 'assets/images/head/1.png', 'assets/images/head/2.png',
+      'assets/images/head/1.png', 'assets/images/head/2.png',
       'assets/images/head/3.png', 'assets/images/head/3.png', 'assets/images/head/4.png',
       'assets/images/head/5.png', 'assets/images/head/6.png', 'assets/images/head/7.png',
     ],
     'eyebrows': [
-      'assets/images/eyebrows/0.png', 'assets/images/eyebrows/1.png', 'assets/images/eyebrows/2.png',
+      'assets/images/eyebrows/1.png', 'assets/images/eyebrows/2.png',
       'assets/images/eyebrows/3.png', 'assets/images/eyebrows/4.png', 'assets/images/eyebrows/5.png',
       'assets/images/eyebrows/6.png', 'assets/images/eyebrows/7.png', 'assets/images/eyebrows/8.png',
     ],
     'eyes': [
-      'assets/images/eyes/0.png', 'assets/images/eyes/1.png', 'assets/images/eyes/2.png',
+      'assets/images/eyes/1.png', 'assets/images/eyes/2.png',
       'assets/images/eyes/3.png', 'assets/images/eyes/4.png', 'assets/images/eyes/5.png',
       'assets/images/eyes/6.png', 'assets/images/eyes/7.png', 'assets/images/eyes/8.png',
     ],
     'hair': [
-      'assets/images/hair/0.png', 'assets/images/hair/1.png', 'assets/images/hair/2.png',
+      'assets/images/hair/1.png', 'assets/images/hair/2.png',
       'assets/images/hair/3.png', 'assets/images/hair/4.png', 'assets/images/hair/5.png',
       'assets/images/hair/6.png', 'assets/images/hair/7.png', 'assets/images/hair/8.png',
     ],
     'nose': [
-      'assets/images/nose/0.png', 'assets/images/nose/1.png', 'assets/images/nose/2.png',
+     'assets/images/nose/1.png', 'assets/images/nose/2.png',
       'assets/images/nose/3.png', 'assets/images/nose/4.png', 'assets/images/nose/5.png',
       'assets/images/nose/6.png', 'assets/images/nose/7.png', 'assets/images/nose/8.png',
     ],
     'glasses': [
-      'assets/images/glasses/0.png', 'assets/images/glasses/1.png', 'assets/images/glasses/2.png',
+      'assets/images/glasses/1.png', 'assets/images/glasses/2.png',
       'assets/images/glasses/3.png', 'assets/images/glasses/4.png', 'assets/images/glasses/5.png',
       'assets/images/glasses/6.png', 'assets/images/glasses/7.png', 'assets/images/glasses/8.png',
     ],
     'moustache': [
-      'assets/images/moustache/0.png', 'assets/images/moustache/1.png', 'assets/images/moustache/2.png',
+      'assets/images/moustache/1.png', 'assets/images/moustache/2.png',
       'assets/images/moustache/3.png', 'assets/images/moustache/4.png', 'assets/images/moustache/5.png',
       'assets/images/moustache/6.png', 'assets/images/moustache/7.png', 'assets/images/moustache/8.png',
     ],
     'mouth': [
-      'assets/images/mouth/0.png', 'assets/images/mouth/1.png', 'assets/images/mouth/2.png',
+      'assets/images/mouth/1.png', 'assets/images/mouth/2.png',
       'assets/images/mouth/3.png', 'assets/images/mouth/4.png', 'assets/images/mouth/5.png',
       'assets/images/mouth/6.png', 'assets/images/mouth/7.png', 'assets/images/mouth/8.png',
     ],
     'jaw': [
-      'assets/images/jaw/0.png', 'assets/images/jaw/1.png', 'assets/images/jaw/2.png',
+      'assets/images/jaw/1.png', 'assets/images/jaw/2.png',
       'assets/images/jaw/3.png', 'assets/images/jaw/4.png', 'assets/images/jaw/5.png',
       'assets/images/jaw/6.png', 'assets/images/jaw/7.png', 'assets/images/jaw/8.png',
     ],
     'beard': [
-      'assets/images/beard/0.png', 'assets/images/beard/1.png', 'assets/images/beard/2.png',
+      'assets/images/beard/1.png', 'assets/images/beard/2.png',
       'assets/images/beard/3.png', 'assets/images/beard/4.png', 'assets/images/beard/5.png',
       'assets/images/beard/6.png', 'assets/images/beard/7.png', 'assets/images/beard/8.png',
     ],
@@ -334,6 +339,8 @@ class _AvatarState extends State<Avatar> {
           ),
           _buildPartsSelectionBar(),
           _buildCategorySelector(),
+
+
         ],
       ),
     );
@@ -384,16 +391,6 @@ class _AvatarState extends State<Avatar> {
         ));
       }
     });
-    // Step 2: Reorder the parts to bring the selected part to the front
-    if (selectedCategory.isNotEmpty) {
-      // Remove the selected part from the list and add it at the last
-      var selectedPart = parts.where((part) => part.key == selectedCategory).toList();
-
-      if (selectedPart.isNotEmpty) {
-        parts.removeWhere((part) => part.key == selectedCategory);
-        parts.add(selectedPart.first); // Bring the selected part to the top
-      }
-    }
 
 
     return parts;
@@ -405,24 +402,44 @@ class _AvatarState extends State<Avatar> {
       padding: const EdgeInsets.all(8.0),
       height: 100,
       color: Colors.grey[200],
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: avatarParts[selectedCategory]!
-            .map((imagePath) => GestureDetector(
-          onTap: () {
-            setState(() {
-              selectedParts[selectedCategory] = imagePath;
-            });
-          },
-          child: Container(
-            margin: const EdgeInsets.all(8.0),
-            child: Image.asset(imagePath, width: 80, height: 80),
+      child: Row(
+        children: [
+          // Refresh Button at the start of the row
+          IconButton(
+            onPressed: () {
+              removeFilter();
+              },
+            icon: Icon(Icons.refresh,size: 30,),
           ),
-        ))
-            .toList(),
+
+          // Parts selection bar
+          Expanded(
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: avatarParts[selectedCategory]!
+                  .map((imagePath) => GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedParts[selectedCategory] = imagePath;
+                  });
+                },
+                child: Container(
+                  margin: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    imagePath,
+                    width: 80,
+                    height: 80,
+                  ),
+                ),
+              ))
+                  .toList(),
+            ),
+          ),
+        ],
       ),
     );
   }
+
 
   // Display the category selector to switch between different parts
   Widget _buildCategorySelector() {
