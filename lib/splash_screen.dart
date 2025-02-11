@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:sketch/avatar.dart';
+import 'package:sketch/MainScreen.dart';
 import 'package:flutter/material.dart';
 class SplashScreen extends StatefulWidget {
   @override
@@ -10,7 +10,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3),(){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Avatar()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> MainScreen()));
     });
   }
 

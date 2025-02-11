@@ -1,9 +1,11 @@
 import 'dart:convert';
-import 'dart:math';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'LoginPage.dart';
 
 class Avatar extends StatefulWidget {
   @override
@@ -14,7 +16,14 @@ class _AvatarState extends State<Avatar> {
   int? selectedFaceIndex;
   double zoomLevel = 150.0;
 
-
+  _signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+    } on FirebaseAuthException catch (e) {
+      print("Error $e");
+    }
+  }
 
   Future<void> saveAvatarState(String faceName) async {
     String dateOnly = DateFormat('yyyy-MM-dd').format(DateTime.now()); // Format the date// Format the date
@@ -290,6 +299,12 @@ class _AvatarState extends State<Avatar> {
               showSavedFacesDialog(context); // Show the list of saved faces
             },
             icon: const Icon(Icons.folder_open,color: Colors.white,),
+          ),
+          IconButton(
+            onPressed: () {
+              _signOut();
+            },
+            icon: const Icon(Icons.logout_rounded,color: Colors.white,),
           ),
         ],
 
