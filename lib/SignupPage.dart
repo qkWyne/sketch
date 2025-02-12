@@ -68,7 +68,7 @@ class _SignupPageState extends State<SignupPage> {
               child: InkWell(
                 child: Container(
                         child: Text("LOGIN",style: TextStyle(
-                            fontWeight: FontWeight.bold,fontSize: 25,color: Colors.black),),
+                            fontWeight: FontWeight.bold,fontSize: 25,color: Colors.grey.shade800),),
                       ),
                 onTap: (){
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
@@ -81,7 +81,7 @@ class _SignupPageState extends State<SignupPage> {
                 width: 120,
                 height: 120,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Colors.grey.shade800,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(110),
                   ),
@@ -96,11 +96,11 @@ class _SignupPageState extends State<SignupPage> {
                 decoration: BoxDecoration(
                   border: Border(
                     top: BorderSide( //                    <--- top side
-                      color: Colors.black,
+                      color: Colors.grey.shade800,
                       width: 12,
                     ),
                     right: BorderSide( //                    <--- top side
-                      color: Colors.black,
+                      color: Colors.grey.shade800,
                       width: 12,
                     ),
                   ),
@@ -117,7 +117,7 @@ class _SignupPageState extends State<SignupPage> {
                 width: 70,
                 height: 70,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Colors.grey.shade800,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(70),
                   ),
@@ -132,7 +132,7 @@ class _SignupPageState extends State<SignupPage> {
                     children: [
                       Container(
                         child: Text("Signup",style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.grey.shade800,
                             fontWeight:FontWeight.bold,
                             fontSize: 30),),
                       ),
@@ -146,7 +146,7 @@ class _SignupPageState extends State<SignupPage> {
                         alignment: Alignment(-0.8, 0),
                         child: Text("Name",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.grey.shade800,
                               fontWeight:FontWeight.bold,
                               fontSize: 16
                           ),),
@@ -154,7 +154,7 @@ class _SignupPageState extends State<SignupPage> {
                       SizedBox(height: 2,),
                       LoginSignUpTextField(
                         controller: _nameController,
-                        prefixIcon: Icon(Icons.person,color: Colors.black,),
+                        prefixIcon: Icon(Icons.person,color: Colors.grey.shade800,),
                         hintText: "Enter Name",
                         validator: (value){
                           if(value!.isEmpty){
@@ -173,7 +173,7 @@ class _SignupPageState extends State<SignupPage> {
                         alignment: Alignment(-0.8, 0),
                         child: Text("Email",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.grey.shade800,
                               fontWeight:FontWeight.bold,
                               fontSize: 16
                           ),),
@@ -182,7 +182,7 @@ class _SignupPageState extends State<SignupPage> {
                       LoginSignUpTextField(
                         controller: _emailController,
                         hintText: "Enter Email",
-                        prefixIcon: Icon(Icons.email_rounded,color: Colors.black,),
+                        prefixIcon: Icon(Icons.email_rounded,color: Colors.grey.shade800,),
                         validator: (value){
                           if(value!.isEmpty){
                             return "Email Required";
@@ -200,7 +200,7 @@ class _SignupPageState extends State<SignupPage> {
                         alignment: Alignment(-0.8, 0),
                         child: Text("Password",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.grey.shade800,
                               fontWeight:FontWeight.bold,
                               fontSize: 16
                           ),),
@@ -209,12 +209,12 @@ class _SignupPageState extends State<SignupPage> {
                       LoginSignUpTextField(
                         controller: _passwordController,
                         obscure: obscure1,
-                        prefixIcon: Icon(Icons.password,color: Colors.black,),
+                        prefixIcon: Icon(Icons.password,color: Colors.grey.shade800,),
                         suffixIcon: IconButton(onPressed: (){
                           setState(() {
                             obscure1 = !obscure1;
                           });
-                        }, icon: Icon(obscure1 ? Icons.visibility_off_outlined : Icons.visibility_outlined,color: Colors.black,)),
+                        }, icon: Icon(obscure1 ? Icons.visibility_off_outlined : Icons.visibility_outlined,color: Colors.grey.shade800,)),
                         hintText: "Enter Password",
                         validator: (value){
                           if(value!.isEmpty){
@@ -236,7 +236,7 @@ class _SignupPageState extends State<SignupPage> {
                         alignment: Alignment(-0.8, 0),
                         child: Text("Confirm Password",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.grey.shade800,
                               fontWeight:FontWeight.bold,
                               fontSize: 16
                           ),),
@@ -245,12 +245,12 @@ class _SignupPageState extends State<SignupPage> {
                       LoginSignUpTextField(
                         controller: _confirmpasswordController ,
                         obscure: obscure2,
-                        prefixIcon: Icon(Icons.password,color: Colors.black,),
+                        prefixIcon: Icon(Icons.password,color: Colors.grey.shade800,),
                         suffixIcon: IconButton(onPressed: (){
                           setState(() {
                             obscure2 = !obscure2;
                           });
-                        }, icon: Icon(obscure2 ? Icons.visibility_off_outlined : Icons.visibility_outlined,color: Colors.black,)),
+                        }, icon: Icon(obscure2 ? Icons.visibility_off_outlined : Icons.visibility_outlined,color: Colors.grey.shade800,)),
                         hintText: "Enter Confirm Password",
                         validator: (value){
                           if(value!.isEmpty){

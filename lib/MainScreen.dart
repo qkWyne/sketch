@@ -49,7 +49,7 @@ class _MainScreenState extends State<MainScreen> {
                                   shape:  RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
-                                  backgroundColor:Colors.black,
+                                  backgroundColor:Colors.grey.shade800,
                                   foregroundColor: Colors.white),
                               onPressed: (){
                                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignupPage()));
@@ -66,10 +66,10 @@ class _MainScreenState extends State<MainScreen> {
                             shape:  RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0), // <-- Radius
                             ),
-                            foregroundColor: Colors.black,
+                            foregroundColor: Colors.grey.shade800,
                             side: const BorderSide(
                               width: 2,
-                              color: Colors.black,
+                              color: Colors.black54,
                             ),
                             backgroundColor: Colors.white,
                           ),onPressed: (){
@@ -91,7 +91,7 @@ class _MainScreenState extends State<MainScreen> {
               width: 120,
               height: 120,
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: Colors.grey.shade800,
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(110),
                 ),
@@ -106,11 +106,11 @@ class _MainScreenState extends State<MainScreen> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: Colors.black,
+                    color: Colors.grey.shade800,
                     width: 12,
                   ),
                   right: BorderSide(
-                    color: Colors.black,
+                    color: Colors.grey.shade800,
                     width: 12,
                   ),
                 ),
@@ -127,7 +127,7 @@ class _MainScreenState extends State<MainScreen> {
               width: 70,
               height: 70,
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: Colors.grey.shade800,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(70),
                 ),

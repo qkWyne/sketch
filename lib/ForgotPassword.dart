@@ -43,7 +43,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               child: InkWell(
                 child: Container(
                   child: Text("LOGIN",style: TextStyle(
-                    fontWeight: FontWeight.bold,fontSize: 25,color: Colors.black,),),
+                    fontWeight: FontWeight.bold,fontSize: 25,color: Colors.grey.shade800,),),
                 ),
                 onTap:(){
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
@@ -56,7 +56,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 width: 120,
                 height: 120,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Colors.grey.shade800,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(110),
                   ),
@@ -71,11 +71,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 decoration: BoxDecoration(
                   border: Border(
                     top: BorderSide( //                    <--- top side
-                      color: Colors.black,
+                      color: Colors.grey.shade800,
                       width: 12,
                     ),
                     right: BorderSide( //                    <--- top side
-                      color: Colors.black,
+                      color: Colors.grey.shade800,
                       width: 12,
                     ),
                   ),
@@ -93,7 +93,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 height: 70,
                 decoration: BoxDecoration(
 
-                  color: Colors.black,
+                  color: Colors.grey.shade800,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(70),
                   ),
@@ -123,7 +123,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         alignment: Alignment(-0.8, 0),
                         child: Text("Email Address",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.grey.shade800,
                               fontWeight:FontWeight.bold,
                               fontSize: 16
                           ),),
@@ -132,7 +132,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       LoginSignUpTextField(
                         controller: _emailController,
                         hintText: "Enter Email",
-                        prefixIcon: Icon(Icons.email_rounded,color: Colors.black,),
+                        prefixIcon: Icon(Icons.email_rounded,color: Colors.grey.shade800,),
                         validator: (value){
                           if(value!.isEmpty){
                             return "Email Required";

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,21 +25,102 @@ class _AvatarState extends State<Avatar> {
   }
 
   Future<void> saveAvatarState(String faceName) async {
-    String dateOnly = DateFormat('yyyy-MM-dd').format(DateTime.now()); // Format the date// Format the date
+    String dateOnly = DateFormat('yyyy-MM-dd').format(DateTime.now());
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> savedFaces = prefs.getStringList('savedFaces') ?? [];
-    String encodedState = jsonEncode(selectedParts);
-    Map<String, String> avatarState = {'name': faceName,'dateTime': dateOnly, 'state': encodedState};
+
+    // Encode selectedParts and partsState
+    String encodedParts = jsonEncode(selectedParts);
+    Map<String, Map<String, dynamic>> encodedStates = {};
+    partsState.forEach((key, value) {
+      encodedStates[key] = value.toJson();
+    });
+
+    // Save both selectedParts and partsState
+    Map<String, dynamic> avatarState = {
+      'name': faceName,
+      'dateTime': dateOnly,
+      'parts': encodedParts,
+      'states': jsonEncode(encodedStates), // Save partsState here
+    };
+
     savedFaces.add(jsonEncode(avatarState));
     await prefs.setStringList('savedFaces', savedFaces);
   }
 
-  Future<List<Map<String, String>>> loadSavedFaces() async {
+  Future<List<Map<String, dynamic>>> loadSavedFaces() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> savedFaces = prefs.getStringList('savedFaces') ?? [];
-    return savedFaces
-        .map((face) => Map<String, String>.from(jsonDecode(face)))
-        .toList();
+
+    return savedFaces.map((face) {
+      Map<String, dynamic> decodedFace = Map<String, dynamic>.from(jsonDecode(face));
+      return {
+        'name': decodedFace['name'],
+        'dateTime': decodedFace['dateTime'],
+        'parts': decodedFace['parts'],
+        'states': decodedFace['states'], // Load partsState here
+      };
+    }).toList();
+  }
+  // Delete the selected saved face
+  Future<void> deleteSavedFace() async {
+    if (selectedFaceIndex != null) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      List<String> savedFaces = prefs.getStringList('savedFaces') ?? [];
+
+      // Remove the face at the selected index
+      savedFaces.removeAt(selectedFaceIndex!);
+
+      // Save the updated list back to SharedPreferences
+      await prefs.setStringList('savedFaces', savedFaces);
+
+      // Optionally, you can show a message or update the UI after deleting
+      setState(() {
+        // Refresh the UI after deletion
+        selectedFaceIndex = null; // Clear the selected face index
+      });
+    }
+  }
+
+  void loadFace(String encodedParts, String encodedStates) {
+    Map<String, String> loadedParts = Map<String, String>.from(jsonDecode(encodedParts));
+    Map<String, dynamic> loadedStates = Map<String, dynamic>.from(jsonDecode(encodedStates));
+
+    setState(() {
+      selectedParts = loadedParts;
+
+      // Load partsState
+      loadedStates.forEach((key, value) {
+        partsState[key] = AvatarPartState(
+          top: value['top'],
+          left: value['left'],
+          size: value['size'],
+        );
+      });
+    });
+  }
+
+  // Reset the avatar to start a new face (clear all selected parts)
+  void resetToNewFace() {
+    setState(() {
+      selectedParts = {
+        'head': '',
+        'eyebrows': '',
+        'eyes': '',
+        'hair': '',
+        'nose': '',
+        'glasses': '',
+        'moustache': '',
+        'mouth': '',
+        'jaw': '',
+        'beard': '',
+      };
+    });
+  }
+  void removeFilter() {
+    setState(() {
+      selectedParts[selectedCategory] = ''; // Reset the current selected part to empty (remove filter)
+    });
   }
   void showNameDialog() {
     String name = ''; // Initial empty name
@@ -96,12 +176,12 @@ class _AvatarState extends State<Avatar> {
   }
 
   void showSavedFacesDialog(BuildContext context) async {
-    List<Map<String, String>> savedFaces = await loadSavedFaces();
+    List<Map<String, dynamic>> savedFaces = await loadSavedFaces();
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Select a Saved Face',style: TextStyle(fontWeight: FontWeight.bold),),
+          title: const Text('Select a Saved Face', style: TextStyle(fontWeight: FontWeight.bold)),
           content: Container(
             height: 400,
             child: ListView.builder(
@@ -112,23 +192,23 @@ class _AvatarState extends State<Avatar> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                        border: Border.all(width: 2,color: Colors.black)
+                      border: Border.all(width: 2, color: Colors.black),
                     ),
                     child: ListTile(
-                      title: Text(savedFaces[index]['name'] ?? 'Unknown',style: TextStyle(fontWeight: FontWeight.bold),),
-                      subtitle: Text('Saved on: ${savedFaces[index]['dateTime']}'), // Display the saved date and time
+                      title: Text(savedFaces[index]['name'] ?? 'Unknown', style: TextStyle(fontWeight: FontWeight.bold)),
+                      subtitle: Text('Saved on: ${savedFaces[index]['dateTime']}'),
                       onTap: () {
-                        loadFace(savedFaces[index]['state']!);
+                        loadFace(savedFaces[index]['parts'], savedFaces[index]['states']);
                         Navigator.pop(context);
                       },
                       trailing: IconButton(
                         icon: Icon(Icons.delete, color: Colors.red),
                         onPressed: () {
                           setState(() {
-                            selectedFaceIndex = index; // Mark the face to be deleted
+                            selectedFaceIndex = index;
                           });
-                          deleteSavedFace(); // Delete the selected face immediately
-                          Navigator.pop(context); // Close the dialog after deletion
+                          deleteSavedFace();
+                          Navigator.pop(context);
                         },
                       ),
                     ),
@@ -141,55 +221,25 @@ class _AvatarState extends State<Avatar> {
       },
     );
   }
-  // Delete the selected saved face
-  Future<void> deleteSavedFace() async {
-    if (selectedFaceIndex != null) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      List<String> savedFaces = prefs.getStringList('savedFaces') ?? [];
-
-      // Remove the face at the selected index
-      savedFaces.removeAt(selectedFaceIndex!);
-
-      // Save the updated list back to SharedPreferences
-      await prefs.setStringList('savedFaces', savedFaces);
-
-      // Optionally, you can show a message or update the UI after deleting
-      setState(() {
-        // Refresh the UI after deletion
-        selectedFaceIndex = null; // Clear the selected face index
-      });
-    }
-  }
-
-  void loadFace(String encodedState) {
-    Map<String, String> loadedState = Map<String, String>.from(jsonDecode(encodedState));
+  void _bringPartToTop(String partKey) {
     setState(() {
-      selectedParts = loadedState;
+      partOrder.remove(partKey); // Remove the part from its current position
+      partOrder.add(partKey);    // Add it to the end of the list (top of the stack)
     });
   }
+  List<String> partOrder = [
+    'head',
+    'eyebrows',
+    'eyes',
+    'hair',
+    'nose',
+    'glasses',
+    'moustache',
+    'mouth',
+    'jaw',
+    'beard',
+  ];
 
-  // Reset the avatar to start a new face (clear all selected parts)
-  void resetToNewFace() {
-    setState(() {
-      selectedParts = {
-        'head': '',
-        'eyebrows': '',
-        'eyes': '',
-        'hair': '',
-        'nose': '',
-        'glasses': '',
-        'moustache': '',
-        'mouth': '',
-        'jaw': '',
-        'beard': '',
-      };
-    });
-  }
-  void removeFilter() {
-    setState(() {
-      selectedParts[selectedCategory] = ''; // Reset the current selected part to empty (remove filter)
-    });
-  }
 
 
   // Stores the selected parts of the avatar
@@ -205,6 +255,7 @@ class _AvatarState extends State<Avatar> {
     'jaw': '',
     'beard': '',
   };
+
 
   // Contains the available parts for each category
   final Map<String, List<String>> avatarParts = {
@@ -277,35 +328,65 @@ class _AvatarState extends State<Avatar> {
   };
 
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        toolbarHeight: 70,
         title: const Text('Sketch', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30,color: Colors.white)),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.grey.shade800,
         actions: [
-          IconButton(
-            icon: Icon(Icons.refresh,color: Colors.white,), // New face button
-            onPressed: resetToNewFace, // Reset avatar to new face (clear selected parts)
-          ),
-          IconButton(
-            onPressed: () {
-              showNameDialog(); // Show dialog to enter the name and save the face
-            },
-            icon: const Icon(Icons.save,color: Colors.white,),
-          ),
-          IconButton(
-            onPressed: () {
-              showSavedFacesDialog(context); // Show the list of saved faces
-            },
-            icon: const Icon(Icons.folder_open,color: Colors.white,),
-          ),
-          IconButton(
-            onPressed: () {
-              _signOut();
-            },
-            icon: const Icon(Icons.logout_rounded,color: Colors.white,),
-          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: PopupMenuButton(position: PopupMenuPosition.under,
+            color: Colors.grey[300],
+            popUpAnimationStyle:  AnimationStyle(duration: Duration(milliseconds: 500)),itemBuilder: (context)=>[
+              PopupMenuItem(child: InkWell(
+                onTap: resetToNewFace,
+                child: Row(children: [
+                           Icon(Icons.refresh,color: Colors.black,),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("New Face",style: TextStyle(color: Colors.black),),
+                  ),
+                ]),
+              ),
+              ),
+              PopupMenuItem(child: InkWell(
+                onTap: showNameDialog,
+                child: Row(children: [
+                           Icon(Icons.save,color: Colors.black,),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Save Face",style: TextStyle(color: Colors.black),),
+                  ),
+                ]),
+              ),
+              ), PopupMenuItem(child: InkWell(
+                onTap: () => showSavedFacesDialog(context),
+                child: Row(children: [
+                           Icon(Icons.folder_open,color: Colors.black,),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Open Face",style: TextStyle(color: Colors.black),),
+                  ),
+                ]),
+              ),
+              ), PopupMenuItem(child: InkWell(
+                onTap: _signOut,
+                child: Row(children: [
+                           Icon(Icons.logout,color: Colors.black,),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("SignOut",style: TextStyle(color: Colors.black),),
+                  ),
+                ]),
+              ),
+              ),
+            ],child: Icon(Icons.menu_rounded,color: Colors.white,size: 30,),),
+          )
         ],
 
     ),
@@ -333,7 +414,7 @@ class _AvatarState extends State<Avatar> {
                   min: 50.0, // Min zoom size
                   max: 200.0, // Max zoom size
                   divisions: 20,
-                  activeColor: Colors.black,// Number of divisions for zoom control
+                  activeColor: Colors.grey.shade800,// Number of divisions for zoom control
                   label: selectedCategory.isEmpty
                       ? zoomLevel.toStringAsFixed(1)
                       : partsState[selectedCategory]!.size.toStringAsFixed(1),
@@ -365,51 +446,52 @@ class _AvatarState extends State<Avatar> {
   // Build all avatar parts with their positions and scaling
   List<Widget> _buildAvatarParts() {
     List<Widget> parts = [];
-    selectedParts.forEach((key, value) {
-      if (value.isNotEmpty) {
+    for (String key in partOrder) {
+      if (selectedParts[key]!.isNotEmpty) {
         AvatarPartState state = partsState[key]!;
         bool isEditable = selectedCategory == key;
-        // Define the boundaries for the dragging area (for example, within the screen size)
+
         double minX = 0.0;
         double maxX = MediaQuery.of(context).size.width - state.size;
         double minY = 0.0;
         double maxY = MediaQuery.of(context).size.height - state.size;
-        parts.add(Positioned(
-          top: state.top,
-          left: state.left,
-          child: GestureDetector(
-            onScaleUpdate: isEditable ? (details) {
-              setState(() {
-                // Scale the part (adjust size)
-                double newSize = state.size * (1 + (details.scale - 1) * 0.05);
-                state.size = newSize.clamp(50.0, 200.0); // Min/Max size restriction
 
-                // Update position based on drag (translation)
-                double newLeft = state.left + details.focalPointDelta.dx;
-                double newTop = state.top + details.focalPointDelta.dy;
+        parts.add(
+          Positioned(
+            top: state.top,
+            left: state.left,
+            child: GestureDetector(
+              onScaleUpdate: isEditable
+                  ? (details) {
+                setState(() {
+                  double newSize = state.size * (1 + (details.scale - 1) * 0.05);
+                  state.size = newSize.clamp(50.0, 200.0);
 
-                // Apply limits to dragging position
-                state.left = newLeft.clamp(minX, maxX);
-                state.top = newTop.clamp(minY, maxY);
-              });
-            } : null,
-            child: Transform.scale(
-              scale: state.size / 150, // Normalize scale factor
-              child:  Image.asset(
-                value,
-                width: state.size,
-                height: state.size,
-                fit: BoxFit.contain,
+                  double newLeft = state.left + details.focalPointDelta.dx;
+                  double newTop = state.top + details.focalPointDelta.dy;
+
+                  state.left = newLeft.clamp(minX, maxX);
+                  state.top = newTop.clamp(minY, maxY);
+                });
+              }
+                  : null,
+              child: Transform.scale(
+                scale: state.size / 150,
+                child: Image.asset(
+                  selectedParts[key]!,
+                  width: state.size,
+                  height: state.size,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),
-        ));
+        );
       }
-    });
-
-
+    }
     return parts;
   }
+
 
   // Display the selection bar for parts based on selected category
   Widget _buildPartsSelectionBar() {
@@ -419,15 +501,10 @@ class _AvatarState extends State<Avatar> {
       color: Colors.grey[200],
       child: Row(
         children: [
-          // Refresh Button at the start of the row
           IconButton(
-            onPressed: () {
-              removeFilter();
-              },
-            icon: Icon(Icons.refresh,size: 30,),
+            onPressed: removeFilter,
+            icon: Icon(Icons.refresh, size: 30),
           ),
-
-          // Parts selection bar
           Expanded(
             child: ListView(
               scrollDirection: Axis.horizontal,
@@ -436,6 +513,7 @@ class _AvatarState extends State<Avatar> {
                 onTap: () {
                   setState(() {
                     selectedParts[selectedCategory] = imagePath;
+                    _bringPartToTop(selectedCategory); // Bring the selected part to the top
                   });
                 },
                 child: Container(
@@ -468,6 +546,7 @@ class _AvatarState extends State<Avatar> {
           onTap: () {
             setState(() {
               selectedCategory = category;
+              _bringPartToTop(selectedCategory); // Bring the selected part to the top
             });
 
           },
@@ -476,7 +555,7 @@ class _AvatarState extends State<Avatar> {
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             decoration: BoxDecoration(
               color: selectedCategory == category
-                  ? Colors.black
+                  ? Colors.grey.shade800
                   : Colors.grey[300],
               borderRadius: BorderRadius.circular(8.0),
             ),
@@ -498,18 +577,36 @@ class _AvatarState extends State<Avatar> {
   }
 }
 
-// Class to manage the position and size of avatar parts
-// Class to manage the state of each avatar part (position, size, and layer index)
 class AvatarPartState {
   double top;
   double left;
   double size;
-  int layerIndex;  // The layer index (z-index)
 
   AvatarPartState({
     this.top = 0.0,
     this.left = 0.0,
     this.size = 150.0,
-    this.layerIndex = 0, // Initially all parts have the same layer (z-index)
   });
+
+  // Convert to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'top': top,
+      'left': left,
+      'size': size,
+    };
+  }
+
+  // Create from JSON
+  factory AvatarPartState.fromJson(Map<String, dynamic> json) {
+    return AvatarPartState(
+      top: json['top'],
+      left: json['left'],
+      size: json['size'],
+    );
+  }
 }
+
+
+
+

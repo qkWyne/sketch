@@ -31,7 +31,7 @@ class LoginSignUpTextField extends StatelessWidget {
           style: TextStyle(height: 2),
           decoration:InputDecoration(
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 2, color: Colors.black),
+              borderSide: BorderSide(width: 2, color: Colors.grey.shade800),
               borderRadius: BorderRadius.circular(8),
             ),
             hintText: hintText,

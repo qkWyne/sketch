@@ -21,7 +21,7 @@ class LoginSignupBtn extends StatelessWidget {
                   topLeft: Radius.circular(8),
                   bottomLeft: Radius.circular(8),), // <-- Radius
               ),
-              backgroundColor:Colors.black,
+              backgroundColor:Colors.grey.shade800,
               foregroundColor: Colors.white),
           onPressed: () {
             callback!();
