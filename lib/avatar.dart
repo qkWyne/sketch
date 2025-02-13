@@ -343,47 +343,47 @@ class _AvatarState extends State<Avatar> {
             child: PopupMenuButton(position: PopupMenuPosition.under,
             color: Colors.grey[300],
             popUpAnimationStyle:  AnimationStyle(duration: Duration(milliseconds: 500)),itemBuilder: (context)=>[
-              PopupMenuItem(child: InkWell(
+              PopupMenuItem(
                 onTap: resetToNewFace,
-                child: Row(children: [
+                child:Row(children: [
                            Icon(Icons.refresh,color: Colors.black,),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text("New Face",style: TextStyle(color: Colors.black),),
                   ),
                 ]),
+
               ),
-              ),
-              PopupMenuItem(child: InkWell(
+              PopupMenuItem(
                 onTap: showNameDialog,
-                child: Row(children: [
+                child:Row(children: [
                            Icon(Icons.save,color: Colors.black,),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text("Save Face",style: TextStyle(color: Colors.black),),
                   ),
                 ]),
-              ),
-              ), PopupMenuItem(child: InkWell(
-                onTap: () => showSavedFacesDialog(context),
-                child: Row(children: [
+
+              ), PopupMenuItem(
+                  onTap: () => showSavedFacesDialog(context),
+                  child:  Row(children: [
                            Icon(Icons.folder_open,color: Colors.black,),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text("Open Face",style: TextStyle(color: Colors.black),),
                   ),
                 ]),
-              ),
-              ), PopupMenuItem(child: InkWell(
-                onTap: _signOut,
-                child: Row(children: [
+
+              ), PopupMenuItem(
+                  onTap: _signOut,
+                  child:Row(children: [
                            Icon(Icons.logout,color: Colors.black,),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text("SignOut",style: TextStyle(color: Colors.black),),
                   ),
                 ]),
-              ),
+
               ),
             ],child: Icon(Icons.menu_rounded,color: Colors.white,size: 30,),),
           )
