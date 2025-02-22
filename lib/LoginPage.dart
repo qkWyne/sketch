@@ -1,6 +1,6 @@
 import 'package:sketch/SignupPage.dart';
 import 'package:sketch/ForgotPassword.dart';
-import 'package:sketch/avatar.dart';
+import 'package:sketch/male_avatar.dart';
 import 'package:sketch/widgets/Login_SignUp_TextField.dart';
 import 'package:sketch/widgets/Login_SignUp_Btn.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
       final User? firebaseUser = (await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text, password: _passwordController.text)).user;
       if(firebaseUser!=null){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Avatar()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MaleAvatar()));
       }
 
     } on FirebaseAuthException catch (e) {

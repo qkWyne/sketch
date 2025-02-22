@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sketch/avatar.dart';
+import 'package:sketch/female_avatar.dart';
+import 'package:sketch/male_avatar.dart';
 import 'package:sketch/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -36,7 +37,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: user != null ? Avatar() : SplashScreen(),
+      home: user != null ? MaleAvatar() : SplashScreen(),
     );
   }
 }
