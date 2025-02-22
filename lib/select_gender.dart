@@ -1,9 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sketch/female_avatar.dart';
 import 'package:sketch/male_avatar.dart';
-
-import 'LoginPage.dart';
 class SelectGender extends StatefulWidget {
   const SelectGender({super.key});
 
@@ -13,15 +10,6 @@ class SelectGender extends StatefulWidget {
 
 class _SelectGenderState extends State<SelectGender> {
   String selectedGender = '';
-
-  _signOut() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
-    } on FirebaseAuthException catch (e) {
-      print("Error $e");
-    }
-  }
 
   void selectGender(String gender) {
     setState(() {
@@ -39,27 +27,6 @@ class _SelectGenderState extends State<SelectGender> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/images/Newfolder/download.png",), fit: BoxFit.cover,),
-            ),
-          ),
-          Positioned(
-            left: 20,
-            top: 20,
-            child: InkWell(
-              child: Container(
-                width: 120,
-                height: 40,
-                decoration: BoxDecoration(
-                color: Colors.grey.shade800,
-                  borderRadius: BorderRadius.circular(10)
-                ),
-                child: Center(
-                  child: Text("SIGN OUT",style: TextStyle(
-                      fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white),),
-                ),
-              ),
-              onTap: (){
-                _signOut();
-              },
             ),
           ),
           Positioned(
