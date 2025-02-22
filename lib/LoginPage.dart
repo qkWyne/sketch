@@ -1,6 +1,7 @@
 import 'package:sketch/SignupPage.dart';
 import 'package:sketch/ForgotPassword.dart';
 import 'package:sketch/male_avatar.dart';
+import 'package:sketch/select_gender.dart';
 import 'package:sketch/widgets/Login_SignUp_TextField.dart';
 import 'package:sketch/widgets/Login_SignUp_Btn.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
       final User? firebaseUser = (await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text, password: _passwordController.text)).user;
       if(firebaseUser!=null){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MaleAvatar()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SelectGender()));
       }
 
     } on FirebaseAuthException catch (e) {
@@ -54,19 +55,19 @@ class _LoginPageState extends State<LoginPage> {
           image: AssetImage("assets/images/Newfolder/download.png",), fit: BoxFit.cover,),
     ),
             ),
-            Positioned(
-              left: 30,
-              top: 40,
-              child: InkWell(
-                child: Container(
-                  child: Text("SIGNUP",style: TextStyle(
-                      fontWeight: FontWeight.bold,fontSize: 25,color: Colors.grey[800],),),
-                ),
-                onTap:(){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignupPage()));
-                  },
-              ),
-            ),
+            // Positioned(
+            //   left: 30,
+            //   top: 40,
+            //   child: InkWell(
+            //     child: Container(
+            //       child: Text("SIGNUP",style: TextStyle(
+            //           fontWeight: FontWeight.bold,fontSize: 25,color: Colors.grey[800],),),
+            //     ),
+            //     onTap:(){
+            //       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignupPage()));
+            //       },
+            //   ),
+            // ),
             Positioned(
               left: 239,
               child: Container(
@@ -198,20 +199,20 @@ class _LoginPageState extends State<LoginPage> {
 
                   ),
                         SizedBox(height: 20,),
-                        InkWell(
-                          child: Container(
-                            alignment: Alignment(-0.8, 0),
-                            child: Text("Forgot Password?",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.black45,
-                              ),),
-                          ),
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword() ));
-                          },
-                        ),
+                        // InkWell(
+                        //   child: Container(
+                        //     alignment: Alignment(-0.8, 0),
+                        //     child: Text("Forgot Password?",
+                        //       style: TextStyle(
+                        //         fontWeight: FontWeight.bold,
+                        //         fontSize: 16,
+                        //         color: Colors.black45,
+                        //       ),),
+                        //   ),
+                        //   onTap: (){
+                        //     Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword() ));
+                        //   },
+                        // ),
                         SizedBox(height: 15,),
                   Align(
                       alignment: Alignment(1, 0),

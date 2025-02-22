@@ -545,9 +545,10 @@ class _FemaleAvatarState extends State<FemaleAvatar> {
 
   // Display the selection bar for parts based on selected category
   Widget _buildPartsSelectionBar() {
+    List<String> filters = avatarParts[selectedCategory] ?? [];
     return Container(
       padding: const EdgeInsets.all(8.0),
-      height: 100,
+      height: 130,
       color: Colors.grey[200],
       child: Row(
         children: [
@@ -558,23 +559,48 @@ class _FemaleAvatarState extends State<FemaleAvatar> {
           Expanded(
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: avatarParts[selectedCategory]!
-                  .map((imagePath) => GestureDetector(
+              children:filters.asMap().entries.map((entry) {
+    int index = entry.key + 1; // Numbering starts from 1
+    String imagePath = entry.value;
+               return GestureDetector(
                 onTap: () {
                   setState(() {
                     selectedParts[selectedCategory] = imagePath;
                     _bringPartToTop(selectedCategory); // Bring the selected part to the top
                   });
                 },
-                child: Container(
-                  margin: const EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    imagePath,
-                    width: 80,
-                    height: 80,
-                  ),
-                ),
-              ))
+                 child: Container(
+                   margin: const EdgeInsets.all(8.0),
+                   child: Column(
+                     children: [
+                       Container(
+                         color:Colors.grey[800],
+                         width: 60,
+                         height: 15,
+                         child: Center(
+                           child: Text(
+                             '$index', // Show filter number
+                             style: TextStyle(
+                               color: Colors.white,
+                               fontWeight: FontWeight.bold,
+                               fontSize: 12,
+                             ),
+                           ),
+                         ),
+                       ),
+                       SizedBox(height: 15,),
+                       Container(
+                         margin: EdgeInsets.only(right: 10),
+                         child: Image.asset(
+                           imagePath,
+                           width: 60,
+                           height: 60,
+                         ),
+                       ),
+                     ],
+                   ),
+                 ),
+              );})
                   .toList(),
             ),
           ),

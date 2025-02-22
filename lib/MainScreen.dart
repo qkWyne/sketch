@@ -52,31 +52,31 @@ class _MainScreenState extends State<MainScreen> {
                                   backgroundColor:Colors.grey.shade800,
                                   foregroundColor: Colors.white),
                               onPressed: (){
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignupPage()));
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
 
-                              }, child: Text("SIGNUP",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
+                              }, child: Text("LOGIN",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: 330,
-                          height: 55,
-                          child: OutlinedButton(style: OutlinedButton.styleFrom(
-                            shape:  RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0), // <-- Radius
-                            ),
-                            foregroundColor: Colors.grey.shade800,
-                            side: const BorderSide(
-                              width: 2,
-                              color: Colors.black54,
-                            ),
-                            backgroundColor: Colors.white,
-                          ),onPressed: (){
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
-
-                          }, child: Text("LOGIN",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
-                        ),
+                        // SizedBox(
+                        //   height: 20,
+                        // ),
+                        // Container(
+                        //   width: 330,
+                        //   height: 55,
+                        //   child: OutlinedButton(style: OutlinedButton.styleFrom(
+                        //     shape:  RoundedRectangleBorder(
+                        //       borderRadius: BorderRadius.circular(8.0), // <-- Radius
+                        //     ),
+                        //     foregroundColor: Colors.grey.shade800,
+                        //     side: const BorderSide(
+                        //       width: 2,
+                        //       color: Colors.black54,
+                        //     ),
+                        //     backgroundColor: Colors.white,
+                        //   ),onPressed: (){
+                        //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                        //
+                        //   }, child: Text("LOGIN",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
+                        // ),
                       ],
                     ),
                   ),
