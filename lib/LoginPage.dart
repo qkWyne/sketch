@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:sketch/SignupPage.dart';
 import 'package:sketch/ForgotPassword.dart';
 import 'package:sketch/male_avatar.dart';
@@ -43,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     return GestureDetector(
       onTap: ()=>FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -68,56 +70,61 @@ class _LoginPageState extends State<LoginPage> {
             //       },
             //   ),
             // ),
-            Positioned(
-              left: 239,
-              child: Container(
-                width: 120,
-                height: 120,
-                decoration: BoxDecoration(
-                  color: Colors.grey[800],
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(110),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: 675,
-              child:Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide( //                    <--- top side
-                      color: Colors.grey.shade800,
-                      width: 12,
-                    ),
-                    right: BorderSide( //                    <--- top side
-                      color: Colors.grey.shade800,
-                      width: 12,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+             Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[800],
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(110),
+                      ),
                     ),
                   ),
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(90),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 290,
-              top: 704,
-              child:Container(
-                width: 70,
-                height: 70,
-                decoration: BoxDecoration(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                   Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          border: Border(
+                            top: BorderSide( //                    <--- top side
+                              color: Colors.grey.shade800,
+                              width: 12,
+                            ),
+                            right: BorderSide( //                    <--- top side
+                              color: Colors.grey.shade800,
+                              width: 12,
+                            ),
+                          ),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(90),
+                          ),
+                        ),
+                      ),
+                   Container(
+                        width: 70,
+                        height: 70,
+                        decoration: BoxDecoration(
 
-                  color: Colors.grey[800],
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(70),
-                  ),
+                          color: Colors.grey[800],
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(70),
+                          ),
+                        ),
+                      ),
+
+                  ],
                 ),
-              ),
+              ],
             ),
+
+
           Center(
         child: Form(
           key: _Formkey,

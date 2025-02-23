@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sketch/female_avatar.dart';
 import 'package:sketch/male_avatar.dart';
 
@@ -24,6 +25,7 @@ class _SelectGenderState extends State<SelectGender> {
   }
 
   void selectGender(String gender) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     setState(() {
       selectedGender = gender;
     });
@@ -41,77 +43,86 @@ class _SelectGenderState extends State<SelectGender> {
                 image: AssetImage("assets/images/Newfolder/download.png",), fit: BoxFit.cover,),
             ),
           ),
-          Positioned(
-            left: 15,
-            top: 20,
-            child: InkWell(
-              child: Container(
-                width: 120,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.grey[800],
-                  borderRadius: BorderRadius.circular(10)
-                ),
-                child: Center(
-                  child: Text("SIGN OUT",style: TextStyle(
-                      fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white,),),
-                ),
-              ),
-              onTap:(){
-                _signOut();
-                },
-            ),
-          ),
-          Positioned(
-            left: 239,
-            child: Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                color: Colors.grey[800],
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(110),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 675,
-            child:Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide( //                    <--- top side
-                    color: Colors.grey.shade800,
-                    width: 12,
-                  ),
-                  right: BorderSide( //                    <--- top side
-                    color: Colors.grey.shade800,
-                    width: 12,
-                  ),
-                ),
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(90),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: 290,
-            top: 704,
-            child:Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
 
-                color: Colors.grey[800],
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(70),
-                ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                 InkWell(
+                    child: Container(
+                      margin: EdgeInsets.only(left:25,top: 25),
+                      width: 120,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[800],
+                          borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: Center(
+                        child: Text("SIGN OUT",style: TextStyle(
+                          fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white,),),
+                      ),
+                    ),
+                    onTap:(){
+                      _signOut();
+                    },
+                  ),
+                  Container(
+                      width: 120,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[800],
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(110),
+                        ),
+                      ),
+                    ),
+                  ],
               ),
-            ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                 Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide( //                    <--- top side
+                            color: Colors.grey.shade800,
+                            width: 12,
+                          ),
+                          right: BorderSide( //                    <--- top side
+                            color: Colors.grey.shade800,
+                            width: 12,
+                          ),
+                        ),
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(90),
+                        ),
+                      ),
+                    ),
+                 Container(
+                      width: 70,
+                      height: 70,
+                      decoration: BoxDecoration(
+
+                        color: Colors.grey[800],
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(70),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ],
           ),
+
+
+
+
           Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -126,8 +137,8 @@ class _SelectGenderState extends State<SelectGender> {
               ),
               const SizedBox(height: 30),
               Container(
-                width: 200,
-                height: 60,
+                width: 250,
+                height: 55,
                 child: ElevatedButton(
                   onPressed: () {
                     if (selectedGender.isNotEmpty) {
@@ -159,8 +170,8 @@ class _SelectGenderState extends State<SelectGender> {
     return GestureDetector(
       onTap: () => selectGender(gender),
       child: AnimatedContainer(
-        width: 250,
-        height: 250,
+        width: 200,
+        height: 200,
         duration: const Duration(milliseconds: 300),
         decoration: BoxDecoration(
           color: isSelected ? Colors.grey[800] : Colors.grey.shade200,
@@ -178,8 +189,8 @@ class _SelectGenderState extends State<SelectGender> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: 150,
-                width: 150,
+              height: 130,
+                width: 130,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(image:AssetImage(imagePath),fit: BoxFit.fill ,)

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -381,6 +382,7 @@ class _FemaleAvatarState extends State<FemaleAvatar> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

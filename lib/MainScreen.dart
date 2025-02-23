@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:sketch/LoginPage.dart';
 import 'package:sketch/SignupPage.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     return Scaffold(
       body: Stack(
         children: [
@@ -85,55 +87,58 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
           ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+             Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade800,
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(110),
+                    ),
+                  ),
+                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            color: Colors.grey.shade800,
+                            width: 12,
+                          ),
+                          right: BorderSide(
+                            color: Colors.grey.shade800,
+                            width: 12,
+                          ),
+                        ),
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(90),
+                        ),
+                      ),
+                    ),
+                  Container(
+                      width: 70,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade800,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(70),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ],
+          ),
 
-          Positioned(
-            child: Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade800,
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(110),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 675,
-            child:Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: Colors.grey.shade800,
-                    width: 12,
-                  ),
-                  right: BorderSide(
-                    color: Colors.grey.shade800,
-                    width: 12,
-                  ),
-                ),
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(90),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: 290,
-            top: 704,
-            child:Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade800,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(70),
-                ),
-              ),
-            ),
-          ),
 
         ],
       ),
