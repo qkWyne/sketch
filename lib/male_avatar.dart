@@ -105,15 +105,15 @@ class _MaleAvatarState extends State<MaleAvatar> {
   void resetToNewFace() {
     setState(() {
       selectedParts = {
-        'head': '',
-        'eyebrows': '',
-        'eyes': '',
+        'sincipit': '',
+        'supercilium': '',
+        'oculus': '',
         'hair': '',
-        'nose': '',
+        'nasus': '',
         'glasses': '',
         'moustache': '',
-        'mouth': '',
-        'jaw': '',
+        'labium': '',
+        'mandible': '',
         'beard': '',
       };
     });
@@ -229,15 +229,15 @@ class _MaleAvatarState extends State<MaleAvatar> {
     });
   }
   List<String> partOrder = [
-    'head',
-    'eyebrows',
-    'eyes',
+    'sincipit',
+    'supercilium',
+    'oculus',
     'hair',
-    'nose',
+    'nasus',
     'glasses',
     'moustache',
-    'mouth',
-    'jaw',
+    'labium',
+    'mandible',
     'beard',
   ];
 
@@ -245,29 +245,29 @@ class _MaleAvatarState extends State<MaleAvatar> {
 
   // Stores the selected parts of the avatar
   Map<String, String> selectedParts = {
-    'head': '',
-    'eyebrows': '',
-    'eyes': '',
+    'sincipit': '',
+    'supercilium': '',
+    'oculus': '',
     'hair': '',
-    'nose': '',
+    'nasus': '',
     'glasses': '',
     'moustache': '',
-    'mouth': '',
-    'jaw': '',
+    'labium': '',
+    'mandible': '',
     'beard': '',
   };
 
 
   // Contains the available parts for each category
   final Map<String, List<String>> avatarParts = {
-    'head': [
+    'sincipit': [
       'assets/images/male/head/1.png','assets/images/male/head/2.png','assets/images/male/head/3.png','assets/images/male/head/4.png','assets/images/male/head/5.png',
       'assets/images/male/head/6.png','assets/images/male/head/7.png','assets/images/male/head/8.png','assets/images/male/head/9.png','assets/images/male/head/10.png',
       'assets/images/male/head/11.png','assets/images/male/head/12.png','assets/images/male/head/13.png','assets/images/male/head/14.png','assets/images/male/head/15.png',
       'assets/images/male/head/16.png','assets/images/male/head/17.png','assets/images/male/head/18.png','assets/images/male/head/19.png','assets/images/male/head/20.png',
       'assets/images/male/head/21.png','assets/images/male/head/22.png','assets/images/male/head/23.png',
     ],
-    'eyebrows': [
+    'supercilium': [
       'assets/images/male/eyebrows/1.png','assets/images/male/eyebrows/2.png','assets/images/male/eyebrows/3.png','assets/images/male/eyebrows/4.png','assets/images/male/eyebrows/5.png',
       'assets/images/male/eyebrows/6.png','assets/images/male/eyebrows/7.png','assets/images/male/eyebrows/8.png','assets/images/male/eyebrows/9.png','assets/images/male/eyebrows/10.png',
       'assets/images/male/eyebrows/11.png','assets/images/male/eyebrows/12.png','assets/images/male/eyebrows/13.png','assets/images/male/eyebrows/14.png','assets/images/male/eyebrows/15.png',
@@ -280,7 +280,7 @@ class _MaleAvatarState extends State<MaleAvatar> {
       'assets/images/male/eyebrows/46.png','assets/images/male/eyebrows/47.png','assets/images/male/eyebrows/48.png','assets/images/male/eyebrows/49.png','assets/images/male/eyebrows/50.png',
 
     ],
-    'eyes': [
+    'oculus': [
       'assets/images/male/eyes/1.png','assets/images/male/eyes/2.png','assets/images/male/eyes/3.png','assets/images/male/eyes/4.png','assets/images/male/eyes/5.png',
       'assets/images/male/eyes/6.png','assets/images/male/eyes/7.png','assets/images/male/eyes/8.png','assets/images/male/eyes/9.png','assets/images/male/eyes/10.png',
       'assets/images/male/eyes/11.png','assets/images/male/eyes/12.png','assets/images/male/eyes/13.png','assets/images/male/eyes/14.png','assets/images/male/eyes/15.png',
@@ -309,7 +309,7 @@ class _MaleAvatarState extends State<MaleAvatar> {
       'assets/images/male/hair/66.png','assets/images/male/hair/67.png','assets/images/male/hair/68.png','assets/images/male/hair/68.png','assets/images/male/hair/70.png',
       'assets/images/male/hair/71.png','assets/images/male/hair/72.png',
     ],
-    'nose': [
+    'nasus': [
       'assets/images/male/nose/1.png','assets/images/male/nose/2.png','assets/images/male/nose/3.png','assets/images/male/nose/4.png','assets/images/male/nose/5.png',
       'assets/images/male/nose/6.png','assets/images/male/nose/7.png','assets/images/male/nose/8.png','assets/images/male/nose/9.png','assets/images/male/nose/10.png',
       'assets/images/male/nose/11.png','assets/images/male/nose/12.png','assets/images/male/nose/13.png','assets/images/male/nose/14.png','assets/images/male/nose/15.png',
@@ -337,7 +337,7 @@ class _MaleAvatarState extends State<MaleAvatar> {
       'assets/images/male/moustache/16.png','assets/images/male/moustache/17.png','assets/images/male/moustache/18.png','assets/images/male/moustache/19.png','assets/images/male/moustache/20.png',
       'assets/images/male/moustache/21.png','assets/images/male/moustache/22.png','assets/images/male/moustache/23.png',
     ],
-    'mouth': [
+    'labium': [
       'assets/images/male/mouth/1.png','assets/images/male/mouth/60.png','assets/images/male/mouth/3.png','assets/images/male/mouth/4.png','assets/images/male/mouth/5.png',
       'assets/images/male/mouth/6.png','assets/images/male/mouth/7.png','assets/images/male/mouth/8.png','assets/images/male/mouth/9.png','assets/images/male/mouth/10.png',
       'assets/images/male/mouth/51.png','assets/images/male/mouth/52.png','assets/images/male/mouth/53.png','assets/images/male/mouth/54.png','assets/images/male/mouth/55.png',
@@ -349,7 +349,7 @@ class _MaleAvatarState extends State<MaleAvatar> {
       'assets/images/male/mouth/41.png','assets/images/male/mouth/42.png','assets/images/male/mouth/43.png','assets/images/male/mouth/44.png','assets/images/male/mouth/45.png',
       'assets/images/male/mouth/46.png','assets/images/male/mouth/47.png','assets/images/male/mouth/48.png','assets/images/male/mouth/49.png','assets/images/male/mouth/50.png',
     ],
-    'jaw': [
+    'mandible': [
       'assets/images/male/jaw/1.png','assets/images/male/jaw/2.png','assets/images/male/jaw/3.png','assets/images/male/jaw/4.png','assets/images/male/jaw/5.png',
       'assets/images/male/jaw/6.png','assets/images/male/jaw/7.png','assets/images/male/jaw/8.png','assets/images/male/jaw/9.png','assets/images/male/jaw/10.png',
       'assets/images/male/jaw/11.png','assets/images/male/jaw/12.png','assets/images/male/jaw/13.png','assets/images/male/jaw/14.png','assets/images/male/jaw/15.png',
@@ -376,19 +376,19 @@ class _MaleAvatarState extends State<MaleAvatar> {
     ],
   };
 
-  String selectedCategory = 'head';
+  String selectedCategory = 'sincipit';
 
   // Store the initial position and scale for each part
   Map<String, AvatarPartState> partsState = {
-    'head': AvatarPartState(),
-    'eyebrows': AvatarPartState(),
-    'eyes': AvatarPartState(),
+    'sincipit': AvatarPartState(),
+    'supercilium': AvatarPartState(),
+    'oculus': AvatarPartState(),
     'hair': AvatarPartState(),
-    'nose': AvatarPartState(),
+    'nasus': AvatarPartState(),
     'glasses': AvatarPartState(),
     'moustache': AvatarPartState(),
-    'mouth': AvatarPartState(),
-    'jaw': AvatarPartState(),
+    'labium': AvatarPartState(),
+    'mandible': AvatarPartState(),
     'beard': AvatarPartState(),
   };
 

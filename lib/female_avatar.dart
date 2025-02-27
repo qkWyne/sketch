@@ -105,16 +105,15 @@ class _FemaleAvatarState extends State<FemaleAvatar> {
   void resetToNewFace() {
     setState(() {
       selectedParts = {
-        'head': '',
-        'eyebrows': '',
-        'eyes': '',
         'hair': '',
-        'nose': '',
+        'hijab': '',
+        'sincipit': '',
+        'supercilium': '',
+        'oculus': '',
+        'nasus': '',
         'glasses': '',
-        'moustache': '',
-        'mouth': '',
-        'jaw': '',
-        'beard': '',
+        'labium': '',
+        'mandible': '',
       };
     });
   }
@@ -229,45 +228,59 @@ class _FemaleAvatarState extends State<FemaleAvatar> {
     });
   }
   List<String> partOrder = [
-    'head',
-    'eyebrows',
-    'eyes',
     'hair',
-    'nose',
+    'hijab',
+    'sincipit',
+    'supercilium',
+    'oculus',
+    'nasus',
     'glasses',
-    'moustache',
-    'mouth',
-    'jaw',
-    'beard',
+    'labium',
+    'mandible',
   ];
 
 
 
   // Stores the selected parts of the avatar
   Map<String, String> selectedParts = {
-    'head': '',
-    'eyebrows': '',
-    'eyes': '',
     'hair': '',
-    'nose': '',
+    'hijab': '',
+    'sincipit': '',
+    'supercilium': '',
+    'oculus': '',
+    'nasus': '',
     'glasses': '',
-    'moustache': '',
-    'mouth': '',
-    'jaw': '',
-    'beard': '',
+    'labium': '',
+    'mandible': '',
   };
 
 
   // Contains the available parts for each category
   final Map<String, List<String>> avatarParts = {
-    'head': [
+
+    'hair': [
+      'assets/images/female/hair/1.png','assets/images/female/hair/2.png','assets/images/female/hair/3.png','assets/images/female/hair/4.png','assets/images/female/hair/5.png',
+      'assets/images/female/hair/6.png','assets/images/female/hair/7.png','assets/images/female/hair/8.png','assets/images/female/hair/9.png','assets/images/female/hair/10.png',
+      'assets/images/female/hair/11.png','assets/images/female/hair/12.png','assets/images/female/hair/13.png','assets/images/female/hair/14.png','assets/images/female/hair/15.png',
+      'assets/images/female/hair/16.png','assets/images/female/hair/17.png','assets/images/female/hair/18.png','assets/images/female/hair/19.png','assets/images/female/hair/20.png',
+      'assets/images/female/hair/21.png','assets/images/female/hair/22.png','assets/images/female/hair/23.png','assets/images/female/hair/24.png','assets/images/female/hair/25.png',
+      'assets/images/female/hair/26.png','assets/images/female/hair/27.png','assets/images/female/hair/28.png','assets/images/female/hair/29.png','assets/images/female/hair/30.png',
+      'assets/images/female/hair/31.png','assets/images/female/hair/32.png','assets/images/female/hair/33.png','assets/images/female/hair/34.png','assets/images/female/hair/35.png',
+      'assets/images/female/hair/36.png','assets/images/female/hair/37.png','assets/images/female/hair/38.png','assets/images/female/hair/39.png',
+    ],
+
+    'hijab': [
+      'assets/images/female/hijaab/1.png','assets/images/female/hijaab/2.png','assets/images/female/hijaab/3.png','assets/images/female/hijaab/4.png','assets/images/female/hijaab/5.png',
+      'assets/images/female/hijaab/6.png','assets/images/female/hijaab/7.png','assets/images/female/hijaab/8.png','assets/images/female/hijaab/9.png',
+    ],
+    'sincipit': [
       'assets/images/female/head/1.png','assets/images/female/head/2.png','assets/images/female/head/3.png','assets/images/female/head/4.png','assets/images/female/head/5.png',
       'assets/images/female/head/6.png','assets/images/female/head/7.png','assets/images/female/head/8.png','assets/images/female/head/9.png','assets/images/female/head/10.png',
       'assets/images/female/head/11.png','assets/images/female/head/12.png','assets/images/female/head/13.png','assets/images/female/head/14.png','assets/images/female/head/15.png',
       'assets/images/female/head/16.png','assets/images/female/head/17.png','assets/images/female/head/18.png','assets/images/female/head/19.png','assets/images/female/head/20.png',
       'assets/images/female/head/21.png','assets/images/female/head/22.png','assets/images/female/head/23.png',
     ],
-    'eyebrows':  [
+    'supercilium':  [
       'assets/images/female/eyebrows/1.png','assets/images/female/eyebrows/2.png','assets/images/female/eyebrows/3.png','assets/images/female/eyebrows/4.png','assets/images/female/eyebrows/5.png',
       'assets/images/female/eyebrows/6.png','assets/images/female/eyebrows/7.png','assets/images/female/eyebrows/8.png','assets/images/female/eyebrows/9.png','assets/images/female/eyebrows/10.png',
       'assets/images/female/eyebrows/11.png','assets/images/female/eyebrows/12.png','assets/images/female/eyebrows/13.png','assets/images/female/eyebrows/14.png','assets/images/female/eyebrows/15.png',
@@ -280,7 +293,7 @@ class _FemaleAvatarState extends State<FemaleAvatar> {
       'assets/images/female/eyebrows/46.png','assets/images/female/eyebrows/47.png','assets/images/female/eyebrows/48.png','assets/images/female/eyebrows/49.png','assets/images/female/eyebrows/50.png',
 
     ],
-    'eyes':[
+    'oculus':[
       'assets/images/female/eyes/1.png','assets/images/female/eyes/2.png','assets/images/female/eyes/3.png','assets/images/female/eyes/4.png','assets/images/female/eyes/5.png',
       'assets/images/female/eyes/6.png','assets/images/female/eyes/7.png','assets/images/female/eyes/8.png','assets/images/female/eyes/9.png','assets/images/female/eyes/10.png',
       'assets/images/female/eyes/11.png','assets/images/female/eyes/12.png','assets/images/female/eyes/13.png','assets/images/female/eyes/14.png','assets/images/female/eyes/15.png',
@@ -292,29 +305,9 @@ class _FemaleAvatarState extends State<FemaleAvatar> {
       'assets/images/female/eyes/41.png','assets/images/female/eyes/42.png','assets/images/female/eyes/43.png','assets/images/female/eyes/44.png','assets/images/female/eyes/45.png',
       'assets/images/female/eyes/46.png','assets/images/female/eyes/47.png','assets/images/female/eyes/48.png','assets/images/female/eyes/49.png','assets/images/female/eyes/50.png',
     ],
-    'hair': [
-  'assets/images/female/hair/1.png','assets/images/female/hair/2.png','assets/images/female/hair/3.png','assets/images/female/hair/4.png','assets/images/female/hair/5.png',
-  'assets/images/female/hair/6.png','assets/images/female/hair/7.png','assets/images/female/hair/8.png','assets/images/female/hair/9.png','assets/images/female/hair/10.png',
-  'assets/images/female/hair/11.png','assets/images/female/hair/12.png','assets/images/female/hair/13.png','assets/images/female/hair/14.png','assets/images/female/hair/15.png',
-  'assets/images/female/hair/16.png','assets/images/female/hair/17.png','assets/images/female/hair/18.png','assets/images/female/hair/19.png','assets/images/female/hair/20.png',
-  'assets/images/female/hair/21.png','assets/images/female/hair/22.png','assets/images/female/hair/23.png','assets/images/female/hair/24.png','assets/images/female/hair/25.png',
-  'assets/images/female/hair/26.png','assets/images/female/hair/27.png','assets/images/female/hair/28.png','assets/images/female/hair/29.png','assets/images/female/hair/30.png',
-  'assets/images/female/hair/31.png','assets/images/female/hair/32.png','assets/images/female/hair/33.png','assets/images/female/hair/34.png','assets/images/female/hair/35.png',
-  'assets/images/female/hair/36.png','assets/images/female/hair/37.png','assets/images/female/hair/38.png','assets/images/female/hair/39.png','assets/images/female/hair/40.png',
-  'assets/images/female/hair/41.png','assets/images/female/hair/42.png','assets/images/female/hair/43.png','assets/images/female/hair/44.png','assets/images/female/hair/45.png',
-  'assets/images/female/hair/46.png','assets/images/female/hair/47.png','assets/images/female/hair/48.png','assets/images/female/hair/49.png','assets/images/female/hair/50.png',
-  'assets/images/female/hair/51.png','assets/images/female/hair/52.png','assets/images/female/hair/53.png','assets/images/female/hair/54.png','assets/images/female/hair/55.png',
-  'assets/images/female/hair/56.png','assets/images/female/hair/57.png','assets/images/female/hair/58.png','assets/images/female/hair/59.png','assets/images/female/hair/60.png',
-  'assets/images/female/hair/61.png','assets/images/female/hair/62.png','assets/images/female/hair/63.png','assets/images/female/hair/64.png','assets/images/female/hair/65.png',
-  'assets/images/female/hair/66.png','assets/images/female/hair/67.png','assets/images/female/hair/68.png','assets/images/female/hair/68.png','assets/images/female/hair/70.png',
-  'assets/images/female/hair/71.png','assets/images/female/hair/72.png','assets/images/female/hair/73.png','assets/images/female/hair/74.png','assets/images/female/hair/75.png',
-  'assets/images/female/hair/76.png','assets/images/female/hair/77.png','assets/images/female/hair/78.png','assets/images/female/hair/79.png','assets/images/female/hair/80.png',
-  'assets/images/female/hair/81.png','assets/images/female/hair/82.png','assets/images/female/hair/83.png','assets/images/female/hair/84.png','assets/images/female/hair/85.png',
-  'assets/images/female/hair/86.png','assets/images/female/hair/87.png','assets/images/female/hair/88.png','assets/images/female/hair/89.png','assets/images/female/hair/90.png',
-  'assets/images/female/hair/91.png','assets/images/female/hair/92.png','assets/images/female/hair/93.png','assets/images/female/hair/94.png','assets/images/female/hair/95.png',
-  'assets/images/female/hair/96.png','assets/images/female/hair/97.png','assets/images/female/hair/98.png','assets/images/female/hair/99.png','assets/images/female/hair/100.png',
-  ],
-    'nose': [
+
+
+    'nasus': [
   'assets/images/female/nose/1.png','assets/images/female/nose/2.png','assets/images/female/nose/3.png','assets/images/female/nose/4.png','assets/images/female/nose/5.png',
   'assets/images/female/nose/6.png','assets/images/female/nose/7.png','assets/images/female/nose/8.png','assets/images/female/nose/9.png','assets/images/female/nose/10.png',
   'assets/images/female/nose/11.png','assets/images/female/nose/12.png','assets/images/female/nose/13.png','assets/images/female/nose/14.png','assets/images/female/nose/15.png',
@@ -336,7 +329,7 @@ class _FemaleAvatarState extends State<FemaleAvatar> {
   'assets/images/female/glasses/31.png','assets/images/female/glasses/32.png','assets/images/female/glasses/33.png','assets/images/female/glasses/34.png',
   ],
 
-    'mouth':[
+    'labium':[
   'assets/images/female/mouth/1.png','assets/images/female/mouth/2.png','assets/images/female/mouth/3.png','assets/images/female/mouth/4.png','assets/images/female/mouth/5.png',
   'assets/images/female/mouth/6.png','assets/images/female/mouth/7.png','assets/images/female/mouth/8.png','assets/images/female/mouth/9.png','assets/images/female/mouth/10.png',
   'assets/images/female/mouth/11.png','assets/images/female/mouth/12.png','assets/images/female/mouth/13.png','assets/images/female/mouth/14.png','assets/images/female/mouth/15.png',
@@ -348,7 +341,7 @@ class _FemaleAvatarState extends State<FemaleAvatar> {
   'assets/images/female/mouth/41.png','assets/images/female/mouth/42.png','assets/images/female/mouth/43.png','assets/images/female/mouth/44.png','assets/images/female/mouth/45.png',
   'assets/images/female/mouth/46.png','assets/images/female/mouth/47.png','assets/images/female/mouth/48.png','assets/images/female/mouth/49.png','assets/images/female/mouth/50.png',
   ],
-    'jaw': [
+    'mandible': [
   'assets/images/female/jaw/1.png','assets/images/female/jaw/2.png','assets/images/female/jaw/3.png','assets/images/female/jaw/4.png','assets/images/female/jaw/5.png',
   'assets/images/female/jaw/6.png','assets/images/female/jaw/7.png','assets/images/female/jaw/8.png','assets/images/female/jaw/9.png','assets/images/female/jaw/10.png',
   'assets/images/female/jaw/11.png','assets/images/female/jaw/12.png','assets/images/female/jaw/13.png','assets/images/female/jaw/14.png','assets/images/female/jaw/15.png',
@@ -362,20 +355,19 @@ class _FemaleAvatarState extends State<FemaleAvatar> {
   ],
   };
 
-  String selectedCategory = 'head';
+  String selectedCategory = 'hair';
 
   // Store the initial position and scale for each part
   Map<String, AvatarPartState> partsState = {
-    'head': AvatarPartState(),
-    'eyebrows': AvatarPartState(),
-    'eyes': AvatarPartState(),
     'hair': AvatarPartState(),
-    'nose': AvatarPartState(),
+    'hijab': AvatarPartState(),
+    'sincipit': AvatarPartState(),
+    'supercilium': AvatarPartState(),
+    'oculus': AvatarPartState(),
+    'nasus': AvatarPartState(),
     'glasses': AvatarPartState(),
-    'moustache': AvatarPartState(),
-    'mouth': AvatarPartState(),
-    'jaw': AvatarPartState(),
-    'beard': AvatarPartState(),
+    'labium': AvatarPartState(),
+    'mandible': AvatarPartState(),
   };
 
 
