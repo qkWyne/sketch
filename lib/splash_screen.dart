@@ -18,8 +18,11 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          child: Image.asset("assets/images/Newfolder/sketch.png"),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            child: Image.asset("assets/images/Newfolder/sketch1.png"),
+          ),
         ),
       ),
     );

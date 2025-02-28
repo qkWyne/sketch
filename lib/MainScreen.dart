@@ -27,14 +27,14 @@ class _MainScreenState extends State<MainScreen> {
                     child: Column(
                       children: [
                         Container(
-                          width:250,
-                          child: Image.asset("assets/images/Newfolder/sketch.png"),
+                          width:300,
+                          child: Image.asset("assets/images/Newfolder/sketch1.png"),
                         ),
                         SizedBox(
                           height: 40,
                         ),
                         Container(
-                          child: Text("Sketch is a toolkit made by qkWyne , for designers",
+                          child: Text("SketchMe is a toolkit made by qkWyne, for designers",
                             style: TextStyle(fontWeight:FontWeight.bold,color: Colors.black45),),
                         ),
                       ],
